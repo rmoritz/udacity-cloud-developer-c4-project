@@ -9,7 +9,7 @@ from 'aws-lambda'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { getUserId } from '../utils'
-import { deleteTodoItem } from '../../dataLayer/todos'
+import { deleteTodoItem } from '../../dataLayer/deleteTodoItem'
 
 export const handler =
 middy(async (event: APIGatewayProxyEvent) : Promise<APIGatewayProxyResult> => {

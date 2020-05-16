@@ -11,16 +11,16 @@ import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { createTodoUpdate } from '../../businessLogic/createTodoUpdate'
 import { getUserId } from '../utils'
-import { updateTodoItem } from '../../dataLayer/todos'
+import { updateTodoItem } from '../../dataLayer/updateTodoItem'
 
 export const handler =
 middy(async (event: APIGatewayProxyEvent) : Promise<APIGatewayProxyResult> => {
   const userId = getUserId(event)
   const todoId = getTodoId(event)
   const request = getRequest(event)
-  const update = createTodoUpdate(request)
+  const update = createTodoUpdate(userId, todoId, request)
 
-  await updateTodoItem(userId, todoId, update)
+  await updateTodoItem(update)
   return {
     statusCode: 204,
     body: null

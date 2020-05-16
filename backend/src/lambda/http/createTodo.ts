@@ -10,7 +10,7 @@ import { CreateTodoRequest } from '../../requests/CreateTodoRequest'
 import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { createTodoItem } from '../../businessLogic/createTodoItem'
-import { insertTodoItem } from '../../dataLayer/todos'
+import { insertTodoItem } from '../../dataLayer/insertTodoItem'
 import { getUserId } from '../utils'
 
 export const handler =
