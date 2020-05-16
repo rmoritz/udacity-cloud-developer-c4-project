@@ -1,6 +1,10 @@
 import 'source-map-support/register'
+import { isOffline } from './isOffline'
 import * as AWS from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
+
+const offline = isOffline()
+const XAWS = offline ? AWS : AWSXRay.captureAWS(AWS)
 
 const options = {
     signatureVersion: 'v4'
@@ -11,11 +15,6 @@ const offlineOptions = {
     ...options
 }
 
-function isOffline(): boolean {
-    return !!process.env.IS_OFFLINE
+export function createS3Client() {
+    return offline ? new XAWS.S3(offlineOptions) : new XAWS.S3(options)
 }
-
-const XAWS = isOffline() ? AWS : AWSXRay.captureAWS(AWS)
-
-export const s3ClientWrapper = 
-    isOffline() ? new XAWS.S3(offlineOptions) : new XAWS.S3(options)

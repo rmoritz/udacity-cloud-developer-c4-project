@@ -1,8 +1,8 @@
 import 'source-map-support/register'
 import { AttachmentUrlUpdate } from '../models/attachmentUrlUpdate'
-import { dynamoDbWrapper } from '../utils/dynamoDbWrapper'
+import { createDocumentClient } from '../utils/dynamoDb'
 
-const docClient = dynamoDbWrapper.doc
+const docClient = createDocumentClient()
 const todosTable = process.env.TODOS_TABLE
 
 export async function updateAttachmentUrl(update: AttachmentUrlUpdate) : Promise<void> {

@@ -1,8 +1,8 @@
 import 'source-map-support/register'
 import { TodoUpdate } from '../models/TodoUpdate'
-import { dynamoDbWrapper } from '../utils/dynamoDbWrapper'
+import { createDocumentClient } from '../utils/dynamoDb'
 
-const docClient = dynamoDbWrapper.doc
+const docClient = createDocumentClient()
 const todosTable = process.env.TODOS_TABLE
 
 export async function updateTodoItem(update: TodoUpdate) : Promise<void> {

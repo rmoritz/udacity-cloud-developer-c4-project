@@ -1,7 +1,7 @@
 import 'source-map-support/register'
-import { dynamoDbWrapper } from '../utils/dynamoDbWrapper'
+import { createDocumentClient } from '../utils/dynamoDb'
 
-const docClient = dynamoDbWrapper.doc
+const docClient = createDocumentClient()
 const todosTable = process.env.TODOS_TABLE
 
 export async function deleteTodoItem(userId: string, todoId: string) : Promise<void> {
