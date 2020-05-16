@@ -15,8 +15,7 @@ import { updateTodoItem } from '../../dataLayer/todos'
 
 export const handler =
 middy(async (event: APIGatewayProxyEvent) : Promise<APIGatewayProxyResult> => {
-  // TODO const userId = getUserId(event)
-  const userId = "1"
+  const userId = getUserId(event)
   const todoId = getTodoId(event)
   const request = getRequest(event)
   const update = createTodoUpdate(request)

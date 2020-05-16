@@ -13,8 +13,7 @@ import { getAllTodoItemsForUser } from '../../dataLayer/todos'
 
 export const handler =
 middy(async (event: APIGatewayProxyEvent) : Promise<APIGatewayProxyResult> => {
-  // TODO const userId = getUserId(event)
-  const userId = "1"
+  const userId = getUserId(event)
   const items = await getAllTodoItemsForUser(userId)
 
   return {
