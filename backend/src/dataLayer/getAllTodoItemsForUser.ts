@@ -3,14 +3,13 @@ import { TodoItem } from '../models/TodoItem'
 import { createDocumentClient } from '../utils/dynamoDb'
 import { createLogger } from '../utils/logger'
 
-
-const logger = createLogger('getAllTodoItemsForUser')
+const logger = createLogger('dataLayer::getAllTodoItemsForUser')
 const docClient = createDocumentClient()
 const todosTable = process.env.TODOS_TABLE
 const todosIndex = process.env.TODOS_INDEX
 
 export async function getAllTodoItemsForUser(userId: string) : Promise<TodoItem[]> {
-  logger.info('Querying DynamoDB for user', userId)
+  logger.debug(`Querying all TODO items for user ${userId}...`)
 
   const result = await docClient.query({
       TableName: todosTable,
@@ -21,7 +20,9 @@ export async function getAllTodoItemsForUser(userId: string) : Promise<TodoItem[
       }
   }).promise()
 
-  logger.info('Query result', result)
-  
-  return result.Items as TodoItem[]
+  const items = result.Items as TodoItem[]
+
+  console.debug(`Found ${items.length} TODO items`)
+
+  return items
 }

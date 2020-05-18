@@ -1,11 +1,15 @@
 import 'source-map-support/register'
 import { TodoUpdate } from '../models/TodoUpdate'
 import { createDocumentClient } from '../utils/dynamoDb'
+import { createLogger } from '../utils/logger'
 
+const logger = createLogger('dataLayer::updateTodoItem')
 const docClient = createDocumentClient()
 const todosTable = process.env.TODOS_TABLE
 
 export async function updateTodoItem(update: TodoUpdate) : Promise<void> {
+    logger.debug(`Updating TODO item ${update.todoId} for user ${update.userId}...`)
+
     await docClient.update({
         TableName: todosTable,
         Key: {
@@ -21,5 +25,7 @@ export async function updateTodoItem(update: TodoUpdate) : Promise<void> {
             ':dueDate': update.dueDate,
             ':done': update.done
         }
-    }).promise()    
+    }).promise()
+
+    logger.debug('TODO item updated')
 }

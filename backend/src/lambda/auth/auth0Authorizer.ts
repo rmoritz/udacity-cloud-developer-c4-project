@@ -6,7 +6,7 @@ import Axios from 'axios'
 import { Jwt } from '../../auth/Jwt'
 import { JwtPayload } from '../../auth/JwtPayload'
 
-const logger = createLogger('auth')
+const logger = createLogger('lambda::auth')
 
 // URL to download certificates for verifying JWT token signatures
 const jwksUrl = 'https://dev-0y3zcn6x.eu.auth0.com/.well-known/jwks.json'
