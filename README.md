@@ -25,4 +25,4 @@ sls dynamodb install
 sls offline start
 ```
 
-Now you can query the local serverless offline instance using Postman and the included [Postman collection](Final Project.postman_collection.json).
+Now you can query the local serverless offline instance using Postman and the included [Postman collection](https://github.com/rmoritz/udacity-cloud-developer-c4-project/blob/master/Final%20Project.postman_collection.json).
